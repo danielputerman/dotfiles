@@ -1,2 +1,5 @@
 # ZSH files
 zsh/.zsh_history
+
+# Prezto
+zsh/.zprezto/
