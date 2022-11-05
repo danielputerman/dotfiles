@@ -1,1 +1,1 @@
-/Users/danielputerman/dotfiles/zsh/.zprezto/runcoms/zshenv
+/Users/danielputerman/.dotfiles/zsh/.zprezto/runcoms/zshenv

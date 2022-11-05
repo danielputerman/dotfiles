@@ -1,1 +1,1 @@
-/Users/danielputerman/dotfiles/zsh/.zprezto/runcoms/zlogout
+/Users/danielputerman/.dotfiles/zsh/.zprezto/runcoms/zlogout
