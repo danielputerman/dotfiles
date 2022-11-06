@@ -3,7 +3,7 @@
 " If you open this file in Vim, it'll be syntax highlighted for you.
 
 " -- PLUGINS 
-source /Users/danielputerman/dotfiles/vim/plugins.vimrc
+source /Users/danielputerman/.dotfiles/.config/nvim/plugins.vimrc
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
