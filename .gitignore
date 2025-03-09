@@ -12,3 +12,5 @@ zsh/.p10k.zsh
 .config/gh/
 .config/rstudio/
 .config/yarn
+.config/github-copilot
+
