@@ -4,6 +4,7 @@
 
 " -- PLUGINS 
 source /Users/danielputerman/.dotfiles/.config/nvim/plugins.vimrc
+source /Users/danielputerman/.dotfiles/.config/nvim/lua/plugins.lua
 
 " Vim is based on Vi. Setting `nocompatible` switches from the default
 " Vi-compatibility mode and enables useful Vim functionality. This
@@ -77,7 +78,7 @@ set mouse+=a
 " Make leader a more usable key
 let mapleader = ' '
 
-" Quickly insert an empty line without entering normal mode
+" Quickly insert an empty line without leaving normal mode
 nnoremap <LEADER>o o<Esc>
 nnoremap <LEADER>O O<Esc>
 
@@ -110,6 +111,12 @@ nnoremap <leader>s :<C-u>FZF<CR>
 " NERDTree remapping
 map <leader>n :NERDTreeToggle<CR>
 
+
+" Easier window contorl using the leader key instead of "Ctrl" key.
+nmap <LEADER>w <C-w>
+nnoremap <C-w>f :wincmd _<CR>:wincmd \|<CR>
+nnoremap <C-w>e <C-w>=
+
 " Automatically set Vim's working directory to the currently open buffer
 autocmd BufEnter * lcd %:p:h
 
@@ -122,7 +129,6 @@ set clipboard=unnamedplus
 " Status line theme
 let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
-
 
 
 

@@ -28,11 +28,6 @@ Plug 'romainl/Apprentice', { 'as': 'apprentice'}
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 
-" Supercharged status line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-
 " IDE
 
 " Syntax highlighting
