@@ -28,11 +28,6 @@ Plug 'romainl/Apprentice', { 'as': 'apprentice'}
 Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 
-" IDE
-
-" Syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-
 
 call plug#end()
 
