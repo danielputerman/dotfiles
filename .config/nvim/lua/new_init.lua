@@ -38,6 +38,9 @@ vim.opt.relativenumber = true
 -- No automatic wrapping of text (especially annoying for log files)
 vim.opt.wrap = false
 
+-- If we do enable wrap at some point, we want the line to break at word boundary.
+vim.opt.linebreak = true
+
 -- Always show the status line at the bottom, even if you only have one window open.
 vim.opt.laststatus = 2
 
