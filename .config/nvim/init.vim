@@ -66,9 +66,3 @@ set gdefault
 " Use the default OSX clipboard
 set clipboard=unnamedplus
 
-" Status line theme
-let g:airline_theme='onedark'
-let g:airline_powerline_fonts = 1
-
-
-
