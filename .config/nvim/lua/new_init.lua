@@ -51,6 +51,10 @@ vim.opt.laststatus = 2
 ]]
 vim.opt.backspace = { "indent", "eol", "start" }
 
+
+-- Moving between lines with "h" and "l"
+vim.opt.whichwrap:append("hl")
+
 --[[ By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
  shown in any window) that has unsaved changes. This is to prevent you from "
  forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
