@@ -31,5 +31,5 @@ Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
-colorscheme apprentice
-"colorscheme base16-default-dark
+"colorscheme apprentice
+colorscheme base16-default-dark
