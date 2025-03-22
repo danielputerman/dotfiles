@@ -79,7 +79,6 @@ vim.opt.updatetime = 100
 -- Disable audible bell because it's annoying.
 vim.opt.errorbells = false
 vim.opt.visualbell = true
-vim.cmd("set t_vb=")
 
 --[[ Enable mouse support. You should avoid relying on this too much, but it can
  sometimes be convenient.
