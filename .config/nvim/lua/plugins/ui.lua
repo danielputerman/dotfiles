@@ -5,24 +5,48 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('lualine').setup({
-        options = { theme = 'powerline_dark' }
+        options = { theme = 'catppuccin' }
       })
     end,
   },
 
   -- Color schemes
   {
-    "romainl/Apprentice",
-    name = "apprentice",
+    "catppuccin/nvim",
+    name = "catppuccin",
     lazy = false,
     priority = 1000,
     config = function()
-      -- Safely load colorscheme, ignore errors if not yet installed
-      pcall(vim.cmd, [[colorscheme apprentice]])
+      require("catppuccin").setup({
+        flavour = "mocha", -- Options: latte, frappe, macchiato, mocha
+        transparent_background = false,
+        integrations = {
+          cmp = true,
+          gitsigns = true,
+          nvimtree = true,
+          treesitter = true,
+          mason = true,
+          native_lsp = {
+            enabled = true,
+            underlines = {
+              errors = { "undercurl" },
+              hints = { "undercurl" },
+              warnings = { "undercurl" },
+              information = { "undercurl" },
+            },
+          },
+        },
+      })
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
-  { "chriskempson/base16-vim" },
-  { "altercation/vim-colors-solarized" },
+  {
+    "romainl/Apprentice",
+    name = "apprentice",
+    lazy = true,
+  },
+  { "chriskempson/base16-vim", lazy = true },
+  { "altercation/vim-colors-solarized", lazy = true },
 
   -- Log handling
   { "MTDL9/vim-log-highlighting" },
