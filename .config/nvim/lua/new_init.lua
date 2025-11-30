@@ -94,6 +94,9 @@ vim.opt.mouse:append("a")
 -- FZF-lua file finder
 vim.keymap.set('n', '<leader>s', '<cmd>FzfLua files<cr>', { desc = 'Find files' })
 
+-- FZF-lua diagnostics viewer
+vim.keymap.set('n', '<leader>e', '<cmd>FzfLua diagnostics_document<cr>', { desc = 'Show document diagnostics' })
+
 -- nvim-tree file explorer
 vim.keymap.set('n', '<leader>n', '<cmd>NvimTreeToggle<cr>', { desc = 'Toggle file explorer' })
 

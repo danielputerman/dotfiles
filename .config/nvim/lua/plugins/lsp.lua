@@ -34,6 +34,18 @@ return {
        local lsp_zero = require('lsp-zero')
        local lspconfig = require('lspconfig')
 
+       -- Configure diagnostics to show virtual text
+       vim.diagnostic.config({
+         virtual_text = {
+           prefix = '●',
+           spacing = 4,
+         },
+         signs = true,
+         update_in_insert = false,
+         underline = true,
+         severity_sort = true,
+       })
+
        lsp_zero.on_attach(function(client, bufnr)
          lsp_zero.default_keymaps({buffer = bufnr})
        end)
