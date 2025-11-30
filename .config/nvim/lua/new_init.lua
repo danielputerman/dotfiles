@@ -1,7 +1,10 @@
 
+-- Set leader key (must be set before loading plugins)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- PLUGIN CONFIGUATIONS
- 
-vim.cmd ({ cmd='source' , args={"/Users/danielputerman/.dotfiles/.config/nvim/plugins.vimrc"} })
+
 require("plugins")
 
 -- OPTIONS
@@ -86,5 +89,12 @@ vim.opt.visualbell = true
 vim.opt.mouse:append("a")
 
 
+-- KEYMAPS
+
+-- FZF-lua file finder
+vim.keymap.set('n', '<leader>s', '<cmd>FzfLua files<cr>', { desc = 'Find files' })
+
+-- nvim-tree file explorer
+vim.keymap.set('n', '<leader>n', '<cmd>NvimTreeToggle<cr>', { desc = 'Toggle file explorer' })
 
 

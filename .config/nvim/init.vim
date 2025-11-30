@@ -38,13 +38,6 @@ vnoremap <tab> %
 " No need to use shift for :
 nnoremap ; :
 
-" FZF easier mapping
-nnoremap <leader>s :<C-u>FZF<CR> 
-
-" NERDTree remapping
-map <leader>n :NERDTreeToggle<CR>
-
-
 " Easier window contorl using the leader key instead of "Ctrl" key.
 nmap <LEADER>w <C-w>
 nnoremap <C-w>f :wincmd _<CR>:wincmd \|<CR>
