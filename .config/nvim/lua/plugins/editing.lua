@@ -22,7 +22,7 @@ return {
       formatters_by_ft = {
         json = { 'prettier' },
         jsonc = { 'prettier' },
-	 python = { "isort", "black" },
+	python = { 'ruff_fix', 'ruff_format' },
 	lua = { 'stylua' },
 	markdown = { 'prettier' },
 	sh = { 'shfmt' },
