@@ -5,6 +5,11 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("fzf-lua").setup({})
+
+      -- Keybindings
+      vim.keymap.set('n', '<leader>f', '<cmd>FzfLua files<cr>', { desc = 'Find files' })
+      vim.keymap.set('n', '<leader>s', '<cmd>FzfLua live_grep<cr>', { desc = 'Find text in files' })
+      vim.keymap.set('n', '<leader>d', '<cmd>FzfLua diagnostics_document<cr>', { desc = 'Show document diagnostics' })
     end,
   },
 
@@ -28,6 +33,9 @@ return {
           dotfiles = false,
         },
       })
+
+      -- Keybinding
+      vim.keymap.set('n', '<leader>n', '<cmd>NvimTreeToggle<cr>', { desc = 'Toggle file explorer' })
     end,
   },
 }
