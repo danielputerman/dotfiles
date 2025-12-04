@@ -1,4 +1,22 @@
 return {
+  -- Python environment selector for pyenv
+  {
+    'linux-cultist/venv-selector.nvim',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'ibhagwan/fzf-lua',
+    },
+    ft = 'python',
+    opts = {
+      pyenv_path = vim.fn.expand('~/.pyenv/versions'),
+      dap_enabled = false,
+      enable_cached_venvs = false,  -- Disable fd requirement
+    },
+    keys = {
+      { '<leader>vs', '<cmd>VenvSelect<cr>', desc = 'Select Python environment' },
+    },
+  },
+
   -- LSP Support
   {
     'VonHeikemen/lsp-zero.nvim',
@@ -57,6 +75,7 @@ return {
        require('mason-lspconfig').setup({
          ensure_installed = {
            'lua_ls',
+           'pyright',
            -- 'ts_ls',
            -- 'rust_analyzer',
          },
@@ -64,6 +83,21 @@ return {
            -- The default handler (applies to all servers)
            function(server_name)
              lspconfig[server_name].setup({})
+           end,
+
+           -- Python-specific configuration with venv detection
+           pyright = function()
+             lspconfig.pyright.setup({
+               settings = {
+                 python = {
+                   analysis = {
+                     autoSearchPaths = true,
+                     useLibraryCodeForTypes = true,
+                     diagnosticMode = 'workspace',
+                   },
+                 },
+               },
+             })
            end,
          },
        })
