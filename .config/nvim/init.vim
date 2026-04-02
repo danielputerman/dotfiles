@@ -1,6 +1,7 @@
 " Comments in Vimscript start with a `"`.
 
 lua << EOF
+	print("Loading new_init.lua from init.vim")
 	require('new_init')
 EOF
 

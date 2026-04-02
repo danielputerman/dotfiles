@@ -20,9 +20,7 @@ return {
   -- LSP Support
   {
     'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
-    lazy = true,
-    config = false,
+    config = true,
   },
 
   -- LSP server manager
@@ -52,32 +50,21 @@ return {
        local lsp_zero = require('lsp-zero')
        local lspconfig = require('lspconfig')
 
-       -- Configure diagnostics to show virtual text
-       vim.diagnostic.config({
-         virtual_text = {
-           prefix = '●',
-           spacing = 4,
-         },
-         signs = true,
-         update_in_insert = false,
-         underline = true,
-         severity_sort = true,
-       })
+       vim.diagnostic.config(lsp_zero.defaults.diagnostics())
 
-       lsp_zero.on_attach(function(client, bufnr)
-         lsp_zero.default_keymaps({buffer = bufnr})
-       end)
+       lsp_zero.defaults.M.on_attach = function(client, bufnr)
+         local opts = {buffer = bufnr, remap = false}
+         -- Here you can add your own keymaps, see :help lsp-zero-keybindings
+       end
 
-       -- Extend lspconfig with lsp-zero defaults
-       lsp_zero.extend_lspconfig()
-
-       -- FIXED: Handlers must be inside setup() to prevent the "automatic_enable" crash
+       -- Handlers must be inside setup()
        require('mason-lspconfig').setup({
          ensure_installed = {
            'lua_ls',
            'pyright',
-           -- 'ts_ls',
-           -- 'rust_analyzer',
+           'tsserver',
+           'rust_analyzer',
+           'jdtls',
          },
          handlers = {
            -- The default handler (applies to all servers)
