@@ -47,22 +47,21 @@ return {
     },
 
     config = function()
-       local lsp_zero = require('lsp-zero')
        local lspconfig = require('lspconfig')
 
-       vim.diagnostic.config(lsp_zero.defaults.diagnostics())
-
-       lsp_zero.defaults.M.on_attach = function(client, bufnr)
-         local opts = {buffer = bufnr, remap = false}
-         -- Here you can add your own keymaps, see :help lsp-zero-keybindings
-       end
+       vim.diagnostic.config({
+         signs = true,
+         underline = true,
+         update_in_insert = false,
+         severity_sort = true,
+       })
 
        -- Handlers must be inside setup()
        require('mason-lspconfig').setup({
          ensure_installed = {
            'lua_ls',
            'pyright',
-           'tsserver',
+           'ts_ls',
            'rust_analyzer',
            'jdtls',
          },
