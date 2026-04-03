@@ -49,6 +49,16 @@ return {
     config = function()
        local lspconfig = require('lspconfig')
 
+       -- Ruff: skip unnamed buffers to prevent panic on missing document path
+       vim.lsp.config('ruff', {
+         root_dir = function(bufnr, on_dir)
+           local fname = vim.api.nvim_buf_get_name(bufnr)
+           if fname == '' then return end
+           local root = vim.fs.root(bufnr, { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' })
+           on_dir(root or vim.fn.getcwd())
+         end,
+       })
+
        vim.diagnostic.config({
          signs = true,
          underline = true,
