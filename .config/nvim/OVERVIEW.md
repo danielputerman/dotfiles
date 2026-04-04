@@ -43,6 +43,7 @@
 | `<leader>f` | Find files (fzf) |
 | `<leader>s` | Live grep search (fzf) |
 | `<leader>d` | Show document diagnostics |
+| `<leader>e` | Show diagnostic float for current line |
 | `<leader>n` | Toggle file explorer (nvim-tree) |
 | `<leader>j` | Format buffer |
 | `<leader>vs` | Select Python virtualenv |

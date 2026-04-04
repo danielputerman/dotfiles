@@ -5,6 +5,7 @@ vim.g.maplocalleader = ' '
 
 -- PLUGIN CONFIGUATIONS
 
+-- Notice this requires the file plugins.lua, not the "plugins" folder.
 require("plugins")
 
 -- OPTIONS
@@ -80,7 +81,24 @@ vim.opt.smartcase = true
 vim.opt.incsearch = true
 
 -- Make Vim refresh faster (default was 4000, i.e. 4 seconds)
-vim.opt.updatetime = 100 
+vim.opt.updatetime = 100
+
+-- Open diagnostic float manually
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic' })
+
+-- Show diagnostic float after 1 second of inactivity (independent of updatetime)
+local diag_timer = nil
+vim.api.nvim_create_autocmd('CursorHold', {
+  callback = function()
+    if diag_timer then
+      diag_timer:stop()
+    end
+    diag_timer = vim.defer_fn(function()
+      vim.diagnostic.open_float(nil, { focus = false })
+    end, 900)
+  end,
+})
+
 
 -- Disable audible bell because it's annoying.
 vim.opt.errorbells = false
