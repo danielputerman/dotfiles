@@ -50,6 +50,7 @@ return {
        local lspconfig = require('lspconfig')
 
        -- Ruff: skip unnamed buffers to prevent panic on missing document path
+       -- Disable hover so only pyright responds to K
        vim.lsp.config('ruff', {
          root_dir = function(bufnr, on_dir)
            local fname = vim.api.nvim_buf_get_name(bufnr)
@@ -57,6 +58,23 @@ return {
            local root = vim.fs.root(bufnr, { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' })
            on_dir(root or vim.fn.getcwd())
          end,
+         on_attach = function(client)
+           client.server_capabilities.hoverProvider = false
+         end,
+       })
+
+       -- lua_ls: recognize Neovim runtime and 'vim' global
+       vim.lsp.config('lua_ls', {
+         settings = {
+           Lua = {
+             runtime = { version = 'LuaJIT' },
+             workspace = {
+               library = vim.api.nvim_get_runtime_file('', true),
+               checkThirdParty = false,
+             },
+             diagnostics = { globals = { 'vim' } },
+           },
+         },
        })
 
        vim.diagnostic.config({
@@ -81,15 +99,20 @@ return {
              lspconfig[server_name].setup({})
            end,
 
-           -- Python-specific configuration with venv detection
+           -- Pyright: type checking and go-to-definition only; ruff handles linting
            pyright = function()
              lspconfig.pyright.setup({
                settings = {
+		pyright = {
+			-- Use Ruff's import organizer instead
+			disableOrganizeImports = true,
+		},
                  python = {
                    analysis = {
                      autoSearchPaths = true,
                      useLibraryCodeForTypes = true,
-                     diagnosticMode = 'workspace',
+                     -- Suppress all linting diagnostics; ruff owns those
+                     ignore = { '**/*' },
                    },
                  },
                },
