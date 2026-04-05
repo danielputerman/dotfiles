@@ -35,7 +35,7 @@ return {
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
     config = function()
       require("mason-nvim-dap").setup({
-        ensure_installed = { "js", "codelldb", "delve" },
+        ensure_installed = { "js", "codelldb" },
         automatic_installation = true,
         handlers = {},  -- use default configs for each adapter
       })
