@@ -52,6 +52,13 @@
 | `<C-w>f` | Maximize window |
 | `<C-w>e` | Equal window sizes |
 | `<Tab>` | Match brace (visual mode) |
+| `<leader>db` | Toggle breakpoint |
+| `<leader>dc` | Continue / Start debugger |
+| `<leader>dn` | Step over |
+| `<leader>di` | Step into |
+| `<leader>do` | Step out |
+| `<leader>dq` | Stop debugger |
+| `<leader>du` | Toggle DAP UI |
 
 ## Working With This Config
 
