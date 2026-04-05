@@ -17,12 +17,6 @@ return {
     },
   },
 
-  -- LSP Support
-  {
-    'VonHeikemen/lsp-zero.nvim',
-    config = true,
-  },
-
   -- LSP server manager
   {
     'williamboman/mason.nvim',
@@ -69,7 +63,7 @@ return {
            Lua = {
              runtime = { version = 'LuaJIT' },
              workspace = {
-               library = vim.api.nvim_get_runtime_file('', true),
+               library = { vim.env.VIMRUNTIME },
                checkThirdParty = false,
              },
              diagnostics = { globals = { 'vim' } },

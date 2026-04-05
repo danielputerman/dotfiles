@@ -20,7 +20,7 @@
 | `editing.lua` | Formatting & text manipulation | conform.nvim (ruff, stylua, prettier, shfmt), vim-surround, vim-commentary |
 | `git.lua` | Git integration | fugitive, gitsigns |
 | `treesitter.lua` | Syntax highlighting via FileType autocmd | nvim-treesitter (15 parsers, new API) |
-| `dap.lua` | Debugging | nvim-dap, nvim-dap-ui, nvim-dap-python (debugpy at `~/.virtualenvs/debugpy/bin/python`) |
+| `dap.lua` | Debugging | nvim-dap, nvim-dap-ui, nvim-dap-python (debugpy at `~/.virtualenvs/debugpy/bin/python`), nvim-dap-go, mason-nvim-dap (js, codelldb) |
 | `ai.lua` | AI assistance | copilot.vim |
 | `markdown.lua` | Markdown preview | markdown-preview.nvim |
 
@@ -32,7 +32,8 @@
 - Format-on-save is enabled via conform.nvim with LSP fallback
 - Python tooling: ruff (linting/formatting) + pyright (type checking/navigation) — see [python-lsp.md](python-lsp.md) for details
 - LSP servers requiring custom config use `vim.lsp.config()` (nvim 0.11 API); mason-lspconfig's `automatic_enable` starts installed servers automatically
-- lua_ls is configured with `diagnostics.globals = { 'vim' }` and the Neovim runtime library for proper nvim Lua support
+- lua_ls is configured with `diagnostics.globals = { 'vim' }` and `VIMRUNTIME` library (not full runtime scan, for faster startup)
+- Python provider (`pynvim`) is disabled — all plugins are Lua-based and don't need it; avoids slow pyenv shim check on Python file open
 - Treesitter uses the new nvim-treesitter API: `require('nvim-treesitter').install({...})` for parsers, `vim.treesitter.start()` via FileType autocmd for highlighting
 - Each plugin module file must return a valid lazy.nvim spec (table or list of tables)
 
@@ -91,11 +92,12 @@
    │ lsp   ││ cmp  ││  ui  ││ nav ││ edit ││ git  │
    │       ││      ││      ││     ││      ││      │
    │pyright││nvim- ││catpu-││fzf- ││confo-││fugi- │
-   │ts_srv ││cmp   ││ccin  ││lua  ││rm    ││tive  │
-   │rust   ││LuaSn-││lual- ││nvim-││surr- ││gits- │
+   │ruff   ││cmp   ││ccin  ││lua  ││rm    ││tive  │
+   │ts_ls  ││LuaSn-││lual- ││nvim-││surr- ││gits- │
    │lua_ls ││ip    ││ine   ││tree ││ound  ││igns  │
-   │jdtls  ││      ││      ││     ││comm- ││      │
-   │mason  ││      ││      ││     ││entary││      │
+   │rust   ││      ││      ││     ││comm- ││      │
+   │jdtls  ││      ││      ││     ││entary││      │
+   │mason  ││      ││      ││     ││      ││      │
    └───────┘└──────┘└──────┘└─────┘└──────┘└──────┘
        ┌───────┬───────┬───────┐
        ▼       ▼       ▼       ▼
@@ -104,7 +106,10 @@
    │       ││      ││sitter││ down │
    │nvim-  ││copil-││      ││      │
    │dap    ││ot    ││15    ││previ-│
-   │dap-ui ││      ││parse-││ew   │
+   │dap-ui ││      ││parse-││ew    │
    │dap-py ││      ││rs    ││      │
+   │dap-go ││      ││      ││      │
+   │mason- ││      ││      ││      │
+   │dap    ││      ││      ││      │
    └───────┘└──────┘└──────┘└──────┘
 ```

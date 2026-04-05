@@ -1,4 +1,7 @@
 
+-- Disable Python provider (no plugins require it; avoids slow pyenv shim check)
+vim.g.loaded_python3_provider = 0
+
 -- Set leader key (must be set before loading plugins)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
