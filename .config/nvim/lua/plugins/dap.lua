@@ -12,6 +12,16 @@ return {
       { "<leader>du", function() require("dapui").toggle() end,          desc = "Toggle DAP UI" },
     },
     config = function()
+      -- Breakpoint signs with catppuccin mocha colors
+      vim.api.nvim_set_hl(0, 'DapBreakpoint',        { fg = '#f38ba8' })  -- red
+      vim.api.nvim_set_hl(0, 'DapBreakpointCondition',{ fg = '#f9e2af' })  -- yellow
+      vim.api.nvim_set_hl(0, 'DapStopped',            { fg = '#a6e3a1' })  -- green
+
+      vim.fn.sign_define('DapBreakpoint',         { text = '●', texthl = 'DapBreakpoint' })
+      vim.fn.sign_define('DapBreakpointCondition',{ text = '◆', texthl = 'DapBreakpointCondition' })
+      vim.fn.sign_define('DapBreakpointRejected', { text = '●', texthl = 'Comment' })
+      vim.fn.sign_define('DapStopped',            { text = '▶', texthl = 'DapStopped', linehl = 'CursorLine' })
+
       local dap = require("dap")
       dap.listeners.after.event_initialized["dapui_config"] = function()
         require("dapui").open()
