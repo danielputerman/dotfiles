@@ -45,7 +45,8 @@ nnoremap <C-w>f :wincmd _<CR>:wincmd \|<CR>
 nnoremap <C-w>e <C-w>=
 
 " Automatically set Vim's working directory to the currently open buffer
-autocmd BufEnter * lcd %:p:h
+" (skip non-file buffers like jdt:// URIs)
+autocmd BufEnter * if expand('%:p') =~# '^/' | lcd %:p:h | endif
 
 " Make search and replace global by default
 set gdefault

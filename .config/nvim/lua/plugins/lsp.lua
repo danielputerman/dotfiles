@@ -17,6 +17,9 @@ return {
     },
   },
 
+  -- Java LSP (uses ftplugin/java.lua to launch)
+  { 'mfussenegger/nvim-jdtls', ft = 'java' },
+
   -- LSP server manager
   {
     'williamboman/mason.nvim',
@@ -89,7 +92,9 @@ return {
          },
          handlers = {
            -- The default handler (applies to all servers)
+           -- jdtls is handled by nvim-jdtls via ftplugin/java.lua
            function(server_name)
+             if server_name == 'jdtls' then return end
              lspconfig[server_name].setup({})
            end,
 
