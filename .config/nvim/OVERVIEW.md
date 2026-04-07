@@ -14,14 +14,14 @@
 | Module | Purpose | Key plugins |
 |---|---|---|
 | `lsp.lua` | Language servers via mason + nvim 0.11 native LSP | pyright, ruff, ts_ls, rust_analyzer, lua_ls, jdtls |
-| `completion.lua` | Autocompletion | nvim-cmp, LuaSnip, cmp sources |
+| `completion.lua` | Autocompletion | nvim-cmp, LuaSnip, cmp sources (j/k to navigate menu) |
 | `navigation.lua` | File finding & tree | fzf-lua, nvim-tree |
 | `ui.lua` | Colorscheme & statusline | catppuccin (mocha), lualine |
 | `editing.lua` | Formatting & text manipulation | conform.nvim (ruff, stylua, prettier, shfmt), vim-surround, vim-commentary |
 | `git.lua` | Git integration | fugitive, gitsigns |
 | `treesitter.lua` | Syntax highlighting via FileType autocmd | nvim-treesitter (15 parsers, new API) |
 | `dap.lua` | Debugging | nvim-dap, nvim-dap-ui, nvim-dap-python (debugpy at `~/.virtualenvs/debugpy/bin/python`), nvim-dap-go, mason-nvim-dap (js, codelldb) |
-| `ai.lua` | AI assistance | copilot.vim |
+| `ai.lua` | AI assistance | copilot.vim (ghost text; `Alt+\` trigger, `Tab` accept — freed from cmp) |
 | `markdown.lua` | Markdown preview | markdown-preview.nvim |
 
 ## Key Conventions
@@ -52,7 +52,7 @@
 | `<leader>w` | Window control |
 | `<C-w>f` | Maximize window |
 | `<C-w>e` | Equal window sizes |
-| `<Tab>` | Match brace (visual mode) |
+| `<Tab>` | Accept Copilot suggestion (insert) / Match brace (visual) / LuaSnip expand+jump (insert+select) |
 | `<leader>db` | Toggle breakpoint |
 | `<leader>dc` | Continue / Start debugger |
 | `<leader>dn` | Step over |
