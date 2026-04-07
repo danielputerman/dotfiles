@@ -32,6 +32,10 @@ return {
         filters = {
           dotfiles = false,
         },
+	update_focused_file = { -- Make nvim-tree auto focus based on the current buffer.
+	    enable = true,      -- Enables the feature
+	    update_root = true, -- Updates the tree root to the current file's directory
+	},
       })
 
       -- Keybinding
