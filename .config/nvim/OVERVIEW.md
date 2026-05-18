@@ -14,7 +14,7 @@
 | Module | Purpose | Key plugins |
 |---|---|---|
 | `lsp.lua` | Language servers via mason + nvim 0.11 native LSP | pyright, ruff, ts_ls, rust_analyzer, lua_ls, jdtls |
-| `completion.lua` | Autocompletion | nvim-cmp, LuaSnip, cmp sources (j/k to navigate menu) |
+| `completion.lua` | Autocompletion | nvim-cmp, LuaSnip, cmp sources (↑/↓ to navigate menu) |
 | `navigation.lua` | File finding & tree | fzf-lua, nvim-tree |
 | `ui.lua` | Colorscheme & statusline | catppuccin (mocha), lualine |
 | `editing.lua` | Formatting & text manipulation | conform.nvim (ruff, stylua, prettier, shfmt), vim-surround, vim-commentary |

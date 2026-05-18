@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Neovim Cheat Sheet</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #1a1a2e;
+    background: #fff;
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #cba6f7; /* catppuccin mauve */
+    background: #1e1e2e;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  h1 span {
+    font-size: 12px;
+    font-weight: 400;
+    color: #a6adc8;
+    margin-left: 8px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .section {
+    border: 1px solid #e0e0f0;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .section.wide {
+    grid-column: span 2;
+  }
+
+  .section.full {
+    grid-column: span 3;
+  }
+
+  .section-header {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 5px 10px;
+    color: #fff;
+  }
+
+  .section-header.purple { background: #7c3aed; }
+  .section-header.blue   { background: #2563eb; }
+  .section-header.green  { background: #16a34a; }
+  .section-header.orange { background: #ea580c; }
+  .section-header.teal   { background: #0d9488; }
+  .section-header.pink   { background: #db2777; }
+  .section-header.gray   { background: #475569; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  td {
+    padding: 3px 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #f0f0f8;
+    font-size: 10.5px;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  td:first-child {
+    font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
+    font-size: 10px;
+    white-space: nowrap;
+    color: #7c3aed;
+    background: #f5f3ff;
+    width: 38%;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) td:first-child { background: #ede9fe; }
+
+  .note {
+    font-size: 9.5px;
+    color: #64748b;
+    padding: 4px 10px 5px;
+    border-top: 1px solid #e0e0f0;
+    background: #fafafa;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  .pill {
+    display: inline-block;
+    background: #e0f2fe;
+    color: #0369a1;
+    border-radius: 3px;
+    padding: 0 4px;
+    font-size: 9px;
+    font-weight: 700;
+    margin-right: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-family: sans-serif;
+  }
+
+  .pill.green { background: #dcfce7; color: #166534; }
+  .pill.orange { background: #fff7ed; color: #9a3412; }
+  .pill.purple { background: #f3e8ff; color: #6b21a8; }
+
+  @media print {
+    body { padding: 10px; font-size: 10px; }
+    @page { margin: 8mm; size: A4 landscape; }
+    .section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Neovim Config Cheat Sheet <span>lazy.nvim · catppuccin mocha · leader = &lt;Space&gt;</span></h1>
+
+<div class="grid">
+
+  <!-- AUTOCOMPLETE -->
+  <div class="section">
+    <div class="section-header purple">Autocomplete (nvim-cmp + LuaSnip)</div>
+    <table>
+      <tr><td>j / k</td><td>Navigate completion menu ↓ / ↑</td></tr>
+      <tr><td>&lt;CR&gt;</td><td>Confirm selected item</td></tr>
+      <tr><td>&lt;Tab&gt;</td><td>Accept Copilot ghost text <span class="pill purple">AI</span> OR LuaSnip expand &amp; jump forward</td></tr>
+      <tr><td>&lt;S-Tab&gt;</td><td>LuaSnip jump backward through snippet</td></tr>
+      <tr><td>&lt;Alt+\&gt;</td><td>Manually trigger Copilot suggestion</td></tr>
+      <tr><td>&lt;Esc&gt;</td><td>Dismiss Copilot suggestion (stays in insert mode)</td></tr>
+      <tr><td>&lt;C-Space&gt;</td><td>Force-open cmp menu</td></tr>
+      <tr><td>&lt;C-e&gt;</td><td>Close cmp menu / abort</td></tr>
+    </table>
+    <div class="note">
+      <span class="pill purple">cmp sources (priority order)</span>
+      nvim_lsp · luasnip · buffer · path · cmdline
+    </div>
+  </div>
+
+  <!-- COPILOT -->
+  <div class="section">
+    <div class="section-header pink">AI / Copilot</div>
+    <table>
+      <tr><td>&lt;Tab&gt;</td><td>Accept full ghost-text suggestion</td></tr>
+      <tr><td>&lt;Alt+\&gt;</td><td>Manually request suggestion</td></tr>
+      <tr><td>&lt;Esc&gt;</td><td>Dismiss suggestion, stay in insert</td></tr>
+      <tr><td>:Copilot status</td><td>Check sign-in state / warning</td></tr>
+      <tr><td>:Copilot setup</td><td>Authenticate with GitHub</td></tr>
+    </table>
+    <div class="note">Tab is shared: Copilot takes priority when ghost text is visible; LuaSnip takes priority inside a snippet; cmp confirm otherwise.</div>
+  </div>
+
+  <!-- LSP DIAGNOSTICS -->
+  <div class="section">
+    <div class="section-header blue">LSP Diagnostics &amp; Errors</div>
+    <table>
+      <tr><td>&lt;leader&gt;d</td><td>Document diagnostics (all issues in file)</td></tr>
+      <tr><td>&lt;leader&gt;e</td><td>Float: show error for current line</td></tr>
+      <tr><td>]d / [d</td><td>Jump to next / previous diagnostic</td></tr>
+      <tr><td>gd</td><td>Go to definition</td></tr>
+      <tr><td>gr</td><td>Go to references</td></tr>
+      <tr><td>K</td><td>Hover documentation</td></tr>
+      <tr><td>&lt;leader&gt;rn</td><td>Rename symbol</td></tr>
+      <tr><td>&lt;leader&gt;ca</td><td>Code action (quickfix / auto-import)</td></tr>
+    </table>
+    <div class="note">
+      <span class="pill">pyright</span> type errors &amp; navigation ·
+      <span class="pill orange">ruff</span> linting &amp; formatting ·
+      <span class="pill green">ts_ls</span> TypeScript ·
+      <span class="pill purple">rust_analyzer</span> Rust
+    </div>
+  </div>
+
+  <!-- FORMATTING -->
+  <div class="section">
+    <div class="section-header teal">Formatting (conform.nvim)</div>
+    <table>
+      <tr><td>&lt;leader&gt;j</td><td>Format buffer manually</td></tr>
+      <tr><td>(on save)</td><td>Auto-format via conform, LSP fallback</td></tr>
+    </table>
+    <div class="note">
+      Formatters by filetype:<br>
+      <span class="pill orange">py</span> ruff ·
+      <span class="pill purple">lua</span> stylua ·
+      <span class="pill blue">js/ts/html/css/json</span> prettier ·
+      <span class="pill green">sh</span> shfmt
+    </div>
+  </div>
+
+  <!-- DEBUGGING -->
+  <div class="section wide">
+    <div class="section-header orange">Debugging (nvim-dap + nvim-dap-ui)</div>
+    <table>
+      <tr><td>&lt;leader&gt;db</td><td>Toggle breakpoint on current line</td></tr>
+      <tr><td>&lt;leader&gt;dc</td><td>Continue / Start debugger session</td></tr>
+      <tr><td>&lt;leader&gt;dn</td><td>Step over (next line)</td></tr>
+      <tr><td>&lt;leader&gt;di</td><td>Step into function call</td></tr>
+      <tr><td>&lt;leader&gt;do</td><td>Step out of current function</td></tr>
+      <tr><td>&lt;leader&gt;dq</td><td>Stop / quit debugger</td></tr>
+      <tr><td>&lt;leader&gt;du</td><td>Toggle DAP UI panel</td></tr>
+    </table>
+    <div class="note">
+      <span class="pill orange">Python</span> debugpy at ~/.virtualenvs/debugpy/bin/python ·
+      <span class="pill green">Go</span> nvim-dap-go ·
+      <span class="pill blue">JS/TS</span> js adapter via mason-nvim-dap ·
+      <span class="pill purple">C/C++/Rust</span> codelldb via mason-nvim-dap
+    </div>
+  </div>
+
+  <!-- FILE NAVIGATION -->
+  <div class="section">
+    <div class="section-header green">Navigation (fzf-lua + nvim-tree)</div>
+    <table>
+      <tr><td>&lt;leader&gt;f</td><td>Find files (fzf)</td></tr>
+      <tr><td>&lt;leader&gt;s</td><td>Live grep / search text</td></tr>
+      <tr><td>&lt;leader&gt;n</td><td>Toggle file tree (nvim-tree)</td></tr>
+    </table>
+  </div>
+
+  <!-- GIT -->
+  <div class="section">
+    <div class="section-header gray">Git (fugitive + gitsigns)</div>
+    <table>
+      <tr><td>:Git</td><td>Fugitive status window</td></tr>
+      <tr><td>:Git blame</td><td>Inline blame view</td></tr>
+      <tr><td>]c / [c</td><td>Jump to next / prev hunk</td></tr>
+      <tr><td>&lt;leader&gt;hs</td><td>Stage hunk</td></tr>
+      <tr><td>&lt;leader&gt;hr</td><td>Reset hunk</td></tr>
+      <tr><td>&lt;leader&gt;hp</td><td>Preview hunk diff</td></tr>
+    </table>
+  </div>
+
+  <!-- EDITING -->
+  <div class="section">
+    <div class="section-header pink">Editing Helpers</div>
+    <table>
+      <tr><td>&lt;leader&gt;o / O</td><td>Insert blank line below / above</td></tr>
+      <tr><td>cs&lt;from&gt;&lt;to&gt;</td><td>Change surrounding (vim-surround)</td></tr>
+      <tr><td>ds&lt;char&gt;</td><td>Delete surrounding</td></tr>
+      <tr><td>ys&lt;motion&gt;&lt;char&gt;</td><td>Add surrounding</td></tr>
+      <tr><td>gc&lt;motion&gt;</td><td>Toggle comment (vim-commentary)</td></tr>
+      <tr><td>gcc</td><td>Toggle comment on current line</td></tr>
+    </table>
+  </div>
+
+  <!-- WINDOWS + MISC -->
+  <div class="section">
+    <div class="section-header blue">Windows &amp; UI</div>
+    <table>
+      <tr><td>&lt;leader&gt;w</td><td>Window control prefix</td></tr>
+      <tr><td>&lt;C-w&gt;f</td><td>Maximize current window</td></tr>
+      <tr><td>&lt;C-w&gt;e</td><td>Equal window sizes</td></tr>
+      <tr><td>&lt;leader&gt;vs</td><td>Select Python virtualenv</td></tr>
+      <tr><td>;</td><td>Enter command mode (remapped from :)</td></tr>
+    </table>
+    <div class="note">Arrow keys are disabled — use hjkl for movement.</div>
+  </div>
+
+  <!-- LSP SERVERS TABLE -->
+  <div class="section full">
+    <div class="section-header purple">LSP Servers (mason-managed, nvim 0.11 automatic_enable)</div>
+    <table>
+      <tr>
+        <td>pyright</td><td>Python — type checking, go-to-definition, hover docs</td>
+      </tr>
+      <tr>
+        <td>ruff</td><td>Python — linting &amp; formatting (replaces flake8/black/isort)</td>
+      </tr>
+      <tr>
+        <td>ts_ls</td><td>TypeScript / JavaScript — full IDE features</td>
+      </tr>
+      <tr>
+        <td>rust_analyzer</td><td>Rust — completions, type hints, inlay hints, cargo integration</td>
+      </tr>
+      <tr>
+        <td>lua_ls</td><td>Lua — diagnostics.globals = {vim}, VIMRUNTIME library (fast startup)</td>
+      </tr>
+      <tr>
+        <td>jdtls</td><td>Java — Eclipse JDT LSP with maven/gradle support</td>
+      </tr>
+    </table>
+    <div class="note">
+      Add new servers: put name in <code>ensure_installed</code> in lsp.lua. Custom config via <code>vim.lsp.config()</code>. After changes: restart nvim, run <strong>:Lazy sync</strong> if plugin specs changed.
+    </div>
+  </div>
+
+</div>
+
+<div style="margin-top:10px; font-size:9px; color:#94a3b8; text-align:right;">
+  Generated from OVERVIEW.md · ~/.dotfiles/.config/nvim · Print: File → Print → Save as PDF (A4 Landscape)
+</div>
+
+</body>
+</html>
