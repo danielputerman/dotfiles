@@ -16,6 +16,7 @@ zsh/.p10k.zsh
 .config/configstore/
 .config/gh-copilot/
 .config/git/
+.claude/
 .config/nvim/.claude/
 
 
