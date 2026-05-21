@@ -28,6 +28,15 @@ All three are set up for fast shell startup — version binaries are available i
 
 `zsh/keys.zsh` — vi-style navigation in the tab-completion menu (`h`/`j`/`k`/`l`).
 
+### Aliases
+
+Custom aliases live in `zsh/aliases.zsh`, sourced from `zshrc`.
+
+| Alias | Command | Notes |
+|-------|---------|-------|
+| `gplf` | `git pull --ff-only` | Pull with fast-forward only |
+| `gps` | `git push` | Replaces the Prezto `gp` alias (removed from `zsh/.zprezto/modules/git/alias.zsh`) |
+
 ### Secrets
 
 If `~/.zsecrets` exists it is sourced at shell start (not tracked).
